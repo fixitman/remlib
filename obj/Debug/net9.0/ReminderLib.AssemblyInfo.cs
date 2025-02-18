@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ReminderLib")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5ea422757ce2b7a9936227a77ff1d9a2634142a4")]
 [assembly: System.Reflection.AssemblyProductAttribute("ReminderLib")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ReminderLib")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
