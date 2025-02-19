@@ -28,7 +28,9 @@ namespace Reminder_WPF.Utilities
 
 		public static Result<T> Fail<T>(string message)
 		{
+#pragma warning disable CS8604 // Possible null reference argument.
 			return new Result<T>(default, false, message);
+#pragma warning restore CS8604 // Possible null reference argument.
 		}
 
 		public static Result Ok()
@@ -48,7 +50,9 @@ namespace Reminder_WPF.Utilities
 
 		public static Result<T> Empty<T>()
 		{
+#pragma warning disable CS8604 // Possible null reference argument.
 			return new Result<T>(default, false, EMPTY);
+#pragma warning restore CS8604 // Possible null reference argument.
 		}
 	}
 
