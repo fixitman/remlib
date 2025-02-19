@@ -42,10 +42,8 @@ namespace Reminder_WPF.Services
             }
             catch (HttpRequestException e)
             {
-                
                 return Result.Fail<List<Reminder>>(e.Message);
             }
-
         }
 
         public async Task<Result<Reminder?>> GetReminderByIdAsync(int id)
@@ -60,7 +58,6 @@ namespace Reminder_WPF.Services
             }
             catch (HttpRequestException e)
             {
-                
                 return Result.Fail<Reminder?>(e.Message);
             }
         }
@@ -73,15 +70,12 @@ namespace Reminder_WPF.Services
                 var result = await client.PostAsJsonAsync<Reminder>($"reminders", item);
                 result.EnsureSuccessStatusCode();
                 var reminder = await result.Content.ReadFromJsonAsync<Reminder>();
-                return Result.Ok(reminder);              
-               
+                return Result.Ok(reminder);    
             }
             catch (HttpRequestException e)
             {
-                
                 return Result.Fail<Reminder?>(e.Message);
             }
-
         }
 
         public async Task<Result> DeleteReminderAsync(Reminder item)
@@ -95,7 +89,6 @@ namespace Reminder_WPF.Services
             }
             catch (HttpRequestException e)
             {
-               
                 return Result.Fail(e.Message);
             }
         }
@@ -111,7 +104,6 @@ namespace Reminder_WPF.Services
             }
             catch (HttpRequestException e)
             {
-               
                 return Result.Fail(e.Message);
             }
         }
