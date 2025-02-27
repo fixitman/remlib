@@ -117,7 +117,7 @@ namespace Reminder_WPF.Services
             return client;
         }
 
-        public static async Task<string?> GetToken(string _username, string _password, string url, int port = 80 )
+        public static async Task<LoginResponse?> GetToken(string _username, string _password, string url, int port = 80 )
         {
             using (var client = new HttpClient()) 
             {
@@ -126,10 +126,10 @@ namespace Reminder_WPF.Services
                 var r = await client.PostAsJsonAsync<LoginModel>("Account/login", login);
                 if (r.IsSuccessStatusCode)
                 {
-                    var token = await r.Content.ReadFromJsonAsync<LoginResponse>();
-                    if(token != null)
+                    var response = await r.Content.ReadFromJsonAsync<LoginResponse>();
+                    if(response != null)
                     {
-                        return token.token;
+                        return response;
                     }
                 } 
                 return null;                   
