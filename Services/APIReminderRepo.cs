@@ -2,7 +2,6 @@
 
 using Reminder_WPF.Models;
 using Reminder_WPF.Utilities;
-
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -10,7 +9,6 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-
 
 namespace Reminder_WPF.Services
 {   
@@ -117,22 +115,21 @@ namespace Reminder_WPF.Services
             return client;
         }
 
-        public static async Task<LoginResponse?> GetToken(string _username, string _password, string url, int port = 80 )
+        public static async Task<Result<LoginResponse?>> GetToken(string _username, string _password, string url, int port = 80 )
         {
-            using (var client = new HttpClient()) 
-            {
+            try{
+                using var client = new HttpClient();
                 client.BaseAddress = new Uri($"{url}:{port}");
                 var login = new LoginModel { UserName = _username, password = _password };
                 var r = await client.PostAsJsonAsync<LoginModel>("Account/login", login);
-                if (r.IsSuccessStatusCode)
-                {
-                    var response = await r.Content.ReadFromJsonAsync<LoginResponse>();
-                    if(response != null)
-                    {
-                        return response;
-                    }
-                } 
-                return null;                   
+                if(!r.IsSuccessStatusCode){
+                    return Result.Fail<LoginResponse?>(r.ReasonPhrase ?? $"Error Code: {r.StatusCode}");
+                }      
+                var response = await r.Content.ReadFromJsonAsync<LoginResponse>();
+                return Result.Ok(response);
+                
+            }catch(HttpRequestException e){
+                return Result.Fail<LoginResponse?>(e.Message);    
             }
         }
     }
